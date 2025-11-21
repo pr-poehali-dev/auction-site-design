@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Icon from '@/components/ui/icon';
 import { toast } from '@/hooks/use-toast';
+import { useNavigate } from 'react-router-dom';
 
 interface Lot {
   id: number;
@@ -26,6 +27,7 @@ interface Bid {
 }
 
 const Index = () => {
+  const navigate = useNavigate();
   const [lots, setLots] = useState<Lot[]>([
     {
       id: 1,
@@ -155,14 +157,17 @@ const Index = () => {
               </div>
             </div>
             <nav className="hidden md:flex gap-6 font-sans">
-              <button className="hover:text-accent transition-colors">Главная</button>
-              <button className="hover:text-accent transition-colors">Аукционы</button>
-              <button className="hover:text-accent transition-colors">Каталог</button>
-              <button className="hover:text-accent transition-colors">О нас</button>
-              <button className="hover:text-accent transition-colors">Правила</button>
-              <button className="hover:text-accent transition-colors">Контакты</button>
+              <button className="text-accent">Главная</button>
+              <button onClick={() => navigate('/catalog')} className="hover:text-accent transition-colors">Каталог</button>
+              <button onClick={() => navigate('/about')} className="hover:text-accent transition-colors">О нас</button>
+              <button onClick={() => navigate('/rules')} className="hover:text-accent transition-colors">Правила</button>
+              <button onClick={() => navigate('/contacts')} className="hover:text-accent transition-colors">Контакты</button>
             </nav>
-            <Button variant="outline" className="bg-transparent border-accent text-primary-foreground hover:bg-accent hover:text-accent-foreground">
+            <Button 
+              onClick={() => navigate('/profile')}
+              variant="outline" 
+              className="bg-transparent border-accent text-primary-foreground hover:bg-accent hover:text-accent-foreground"
+            >
               <Icon name="User" size={18} className="mr-2" />
               Профиль
             </Button>
